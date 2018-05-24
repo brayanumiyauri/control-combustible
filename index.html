@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Control Combustible</title>
-  </head>
-  <body>
-    <script type="text/javascript" src="/assets/app/assets/plugins/form-ckeditor/ckeditor.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="logistica/assets/css/logistica-efectos.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -20,7 +25,7 @@
             <li class="active">Solicitud de Cotización</li>
         </ol>
     </div>
-    <div class="container-fluid" ng-controller="LogisticaControlCombustibleController">
+    <div class="container-fluid" ng-app="logistica.control-combustible" ng-controller="LogisticaControlCombustibleController"></div>
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -44,7 +49,7 @@
                                     </select>
                                     <div class="input-group-btn">
                                         <div class="btn btn-success btn-sm" ng-click="abrirNuevoOc()">
-                                            <span class="fa fa-plus"></span>
+                                            <span class="fa fa-plus" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -130,10 +135,10 @@
                     <h6 style="color: #f4f6f7">
                         <i class="fa fa-list" style="padding-right: 3px"></i> Reporte
                         <a type="button" class="btn btn-success btn-xs pull-right" ng-click="frmControlCombustible.imprimirRequerimiento()">
-                            <i class="fa fa-print"></i>Imprimir
+                            <i class="fa fa-print"></i> Imprimir
                         </a>
-                        <a type="button" class="btn btn-magenta btn-xs pull-right" ng-click="openAddModalReporte()">
-                            <i class="fa fa-print"></i>Reporte Anual
+                        <a type="button" class="btn btn-magenta btn-xs pull-right" ng-click="openAddModalReporte()" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa fa-print"></i> Reporte Anual
                         </a>
                     </h6>
                 </div>
@@ -190,11 +195,102 @@
             </div>
         </div>
     </div>
+    
+        <!-- Modal de reporte anual-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <h6>
+                                    <i class="fas fa-arrow-alt-circle-down" style="padding-right: 3px"></i> Reporte Anual
+                                </h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <br>
+                        <span>Seleccione: </span> <select name="" id="" style="width: 85%; padding: 0.3em; border-radius: 3px"></select>
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                            <a type="button" class="btn btn-success" ng-click="frmControlCombustible.imprimirRequerimiento()">
+                                    <i class="fa fa-print"></i> Imprimir
+                                </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal de informacion o/c -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                    <div class="modal-header oc">
+                        <span>INFORMACION O/C</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <br>
+                        <h6>
+                                <i class="fas fa-arrow-alt-circle-down" style="padding-right: 3px"></i> Agregar
+                            </h6>
+                            <hr>
+                            <span>Fecha de Notificacion: </span> <select style="width: 35%; padding: 0.3em; border-radius: 3px"></select>
+                            <span style="margin-left: 5em">O/C: </span> <select style="width: 30%; padding: 0.3em; border-radius: 3px"></select>
+                            <hr>
+                            <h6>
+                                    <i class="fas fa-arrow-alt-circle-down" style="padding-right: 3px"></i> Lista
+                                </h6>
+                                <hr>
+                                <div class="row">
+                                        <div class="col-lg-12">
+                                        <div class="col-lg-12">
+                                          <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Filtro de Busqueda">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-default" type="button"><i class="fas fa-search" style="padding-right: 3px"></i></button>
+                                            </span>
+                                          </div><!-- /input-group -->
+                                        </div><!-- /.col-lg-6 -->
+                                      </div><!-- /.row -->
+                                      <div class="col-md-12">
+                                            <br>
+                                            <table class="table table-bordered table-condensed table-hover table-striped">
+                                                <thead style="background: #63b7e6; font-size: 10px; font-family:Arial; color: white">
+                                                    <tr>
+                                                        <th width="15%" style="text-align: center">O/C</th>
+                                                        <th width="20%" style="text-align: center">RUC</th>
+                                                        <th width="20%" style="text-align: center">RAZON SOCIAL</th>
+                                                        <th width="20%" style="text-align: center">DESCRIPCION</th>
+                                                        <th width="20%" style="text-align: center">CANTIDAD</th>
+                                                        <th width="5%" style="text-align: center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="text-align: center; font-size: 10px; font-family: Arial">O/C 3</td>
+                                                        <td style="text-align: center; font-size: 10px; font-family: Arial">203705964</td>
+                                                        <td style="text-align: center; font-size: 10px; font-family: Arial">GRIFO J.H.L.P.E.I.R.LTDA</td>
+                                                        <td style="text-align: center; font-size: 10px; font-family: Arial">GASOHOL DE 90 OCTANOS</td>
+                                                        <td style="text-align: center; font-size: 10px; font-family: Arial">250 Gln</td>
+                                                        <td style="text-align: center; font-size: 10px; font-family: Arial"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <script type="text/javascript" src="vendors/jquery/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="app.js"></script>
-  </body>
+</body>
+
 </html>

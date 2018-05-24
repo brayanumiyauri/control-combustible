@@ -1,6 +1,7 @@
 'use strict'
-angular.module('logistica.control-combustible', [])
-    .controller('LogisticaControlCombustibleController', ['$scope', '$http', '$location', '$bootbox', '$modal', '$auth', 'MaintService',
+
+var app = angular.module('logistica.control-combustible', []);
+app.controller('LogisticaControlCombustibleController', ['$scope', '$http', '$location', '$bootbox', '$modal', '$auth', 'MaintService',
         function ($scope, $http, $location, $bootbox, $modal, $auth, MaintService) {
             /************************** URLS ***********************/
             let urlOcCombustibleGet = 'logistica/combustible/get_list_oc_combustible/';
@@ -19,7 +20,6 @@ angular.module('logistica.control-combustible', [])
             let url_control_combustible_anual_imprimir = 'logistica/combustible/reporte_anual/get/';
             let urlVehiculoDetalleGet = 'logistica/combustible/get_list_vehiculo_detalle/';
             let sfecha = new Date().toJSON().slice(0, 10);
-
             let maint_modal = $scope.maint;
             let open_modal_ok = $scope.openModalOk;
             $scope.frmControlCombustible = {
